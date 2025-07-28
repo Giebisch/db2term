@@ -1,8 +1,8 @@
 Output demo.gif
 
 Set FontSize 14
-Set Width 600
-Set Height 600
+Set Width 900
+Set Height 500
 Set Shell zsh
 Set FontFamily "AnonymicePro Nerd Font Mono"
 

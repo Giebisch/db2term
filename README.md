@@ -1,81 +1,73 @@
 # db2term
 
-Deutsche Bahn to Terminal – A CLI tool for quickly viewing your favorite
-German public transport connections.
+Deutsche Bahn to Terminal – A TUI for quickly viewing your favorite
+German public transport connections on the command line.
 
-Written in Go 🧳🚉💻
-
-## ✨ Overview
-
-db2term is a lightweight Go program that brings Deutsche Bahn (DB) public transport schedules directly to your terminal. Whether you commute daily or frequently travel via train, S-Bahn, U-Bahn, or bus, db2term helps you stay updated on your preferred routes with just a few keystrokes.
-🎯 Features
-
-- 🚌 Support for all DB transit modes: Train, S-Bahn, U-Bahn, and buses.
-- ⭐ Favorite routes: Save your most-used trips for quick access.
-- 💨 Blazingly fast CLI: Optimized for performance and minimal output latency.
-- 💻 Terminal-first experience: No GUI, just clean and readable output for your shell or tmux setup.
+Written in Go!
 
 ## 📸 Demo
 
 Here's a preview of db2term in action:
 
-    Want to contribute a better GIF or terminal theme? PRs welcome!
+![demo.gif](docs/demo.gif)
+
+## ✨ Overview
+
+db2term is a lightweight Go program that brings Deutsche Bahn (DB) public transport schedules directly to your terminal. Whether you commute daily or frequently travel via train, S-Bahn, U-Bahn, or bus, db2term helps you stay updated on your preferred routes with just a few keystrokes.
+
+**🎯 Features**
+
+ 🚌 Support for all DB transit modes: Train, S-Bahn, U-Bahn, buses, etc
+
+ ⭐ Favorite routes: Save your most-used trips for quick access.
+
+ 💨 Blazingly fast CLI: Optimized for performance and minimal output latency.
+
+ 💻 Terminal-first experience: Pretty TUI for quickly showing the next connections
 
 ## 🛠 Installation
 
 Prerequisites
 
-    Go 1.20 or higher
+    Go 1.24
 
-Install via go install
-
-go install github.com/<your-username>/db2term@latest
-
-Or clone and build manually
-
-git clone <https://github.com/><your-username>/db2term.git
-cd db2term
-go build -o db2term
-
-and Nerdfonts
+You will also have to enable [Nerdfonts](https://www.nerdfonts.com/) in your terminal.
 
 ## 🚀 Usage
 
-Basic command
+You can use `make build` to build a binary.
 
-db2term <from> <to>
+Recommended usage is to alias it in your `~/.zshrc` or `~/.bash_profile`.
 
-Example:
+Right now you have to manually input the station codes in the created `<temp>/db2term/config.json`
 
-db2term berlin hbf potsdam hbf
+`db2term` automatically creates a new folder in `os.UserConfigDir()`.
+Check, where this in your OS.
 
-With saved favorites
+This only needs to be done once, but I still want to add the functionality to add station codes via a search bar within the TUI, so you don't have to manually retrieve them from the DB website.
 
-db2term fav home-office
+Example `config.json`:
 
-You can configure your favorites using a simple config file (~/.db2term/config.yml):
+```json
 
-favorites:
-  home-office:
-    from: "Berlin Hbf"
-    to: "Potsdam Griebnitzsee"
-  office-home:
-    from: "Potsdam Griebnitzsee"
-    to: "Berlin Hbf"
+{
+  "trips": [
+    {
+      "from": "München Hbf",
+      "to": "Dachau Stadt",
+      "fromCode": "A=1@O=München Hbf@X=11558339@Y=48140229@U=80@L=8000261@B=1@p=1752089579@i=U×008020347@",
+      "toCode": "A=1@O=Dachau Stadt@X=11439762@Y=48266662@U=80@L=8001355@B=1@p=1750894836@i=U×008020455@"
+    },
+    {
+      "from": "Dachau Stadt",
+      "to": "München Hbf",
+      "fromCode": "A=1@O=Dachau Stadt@X=11439762@Y=48266662@U=80@L=8001355@B=1@p=1750894836@i=U×008020455@",
+      "toCode": "A=1@O=München Hbf@X=11558339@Y=48140229@U=80@L=8000261@B=1@p=1752089579@i=U×008020347@"
+    }
+  ]
+}
 
-## 🧠 How It Works
-
-db2term interacts with Deutsche Bahn’s public transport APIs to fetch live connection data. It parses and formats the results to present them clearly in your terminal, without needing to visit a website or open an app.
-🧪 Example Output
-
-🚆 ICE 1723 | Berlin Hbf → München Hbf | Dep: 14:30 | Arr: 18:45 | Platform: 8 | On Time
-🚇 U7 | Mehringdamm → Rathaus Spandau | Dep: 14:36 | Arr: 15:05 | On Time
-
-🔮 Planned Features
-
-- Live delay tracking
-
-- Station search
+```
 
 ## 🙌 Contributing
 
